@@ -1,33 +1,34 @@
 package com.example.teste.model;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "projeto_Artista")
 public class Artista {
 
+    //Artista é a classe dominante do relacionamento N-N com músicas
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    private int id_artista;
 
     @Column
     private String nome;
 
     @Column
     @ManyToMany
+    @JoinTable(name="artista_musica", joinColumns = {@JoinColumn(name = "")})
     private List<Musica> musicas;
 
     @Column
     private List<Album> albuns;
 
-    public int getCodigo() {
-        return codigo;
+    public int getId_artista() {
+        return id_artista;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId_artista(int id_artista) {
+        this.id_artista = id_artista;
     }
 
     public String getNome() {
