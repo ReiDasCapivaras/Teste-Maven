@@ -1,4 +1,7 @@
 package com.example.teste.repository;
 
-public interface ArtistaRepository {
+import com.example.teste.model.Artista;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ArtistaRepository extends JpaRepository <Artista, Integer> {
 }

@@ -3,7 +3,7 @@ package com.example.teste.model;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@Table(name = "projeto_Artista")
+@Table()
 public class Artista {
 
     //Artista é a classe dominante do relacionamento N-N com músicas
@@ -17,11 +17,19 @@ public class Artista {
 
     @Column
     @ManyToMany
-    @JoinTable(name="artista_musica", joinColumns = {@JoinColumn(name = "")})
     private List<Musica> musicas;
 
     @Column
+    @OneToMany
     private List<Album> albuns;
+
+    public List<Album> getAlbuns() {
+        return albuns;
+    }
+
+    public void setAlbuns(List<Album> albuns) {
+        this.albuns = albuns;
+    }
 
     public int getId_artista() {
         return id_artista;

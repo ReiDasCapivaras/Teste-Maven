@@ -1,11 +1,13 @@
 package com.example.teste.model;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "projeto-musica")
+@Table()
 public class Musica {
 
     @Id
@@ -18,12 +20,27 @@ public class Musica {
     @Column
     private String album;
 
-    @Column
     @ManyToMany
-    private List<Artista> artista;
+    private List<Artista> artista_id;
 
     @Column
-    private double duracaoS;
+    private String artista;
+
+    public List<Artista> getArtista_id() {
+        return artista_id;
+    }
+
+    public void setArtista_id(List<Artista> artista_id) {
+        this.artista_id = artista_id;
+    }
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -49,19 +66,5 @@ public class Musica {
         this.album = album;
     }
 
-    public List<Artista> getArtista() {
-        return artista;
-    }
 
-    public void setArtista(List<Artista> artista) {
-        this.artista = artista;
-    }
-
-    public double getDuracaoS() {
-        return duracaoS;
-    }
-
-    public void setDuracaoS(double duracaoS) {
-        this.duracaoS = duracaoS;
-    }
 }
