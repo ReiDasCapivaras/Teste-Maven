@@ -22,4 +22,6 @@ public class AlbumController {
     {
         return albumRepository.findAll();
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.example.teste.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +21,8 @@ public class Album {
 
 
     @ManyToOne
-    @JoinColumn(name = "artista")
+    @JoinTable(name = "album_artista", joinColumns = {@JoinColumn(name = "id_album")}, inverseJoinColumns = {@JoinColumn(name = "id_artista")})
+    @JsonIgnoreProperties("albuns")
     private Artista artista;
 
 

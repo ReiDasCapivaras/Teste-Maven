@@ -1,10 +1,15 @@
 package com.example.teste.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
 @Entity
-@Table()
-public class Artista {
+@Table
+public class Artista implements Serializable {
 
     //Artista é a classe dominante do relacionamento N-N com músicas
 
@@ -15,19 +20,19 @@ public class Artista {
     @Column
     private String nome;
 
-    @Column
-    @ManyToMany
+    @JsonIgnoreProperties ("artistas")
+    @ManyToMany (mappedBy = "artistas")
     private List<Musica> musicas;
 
     @Column
     @OneToMany
-    private List<Album> albuns;
+    private Set<Album> albuns;
 
-    public List<Album> getAlbuns() {
+    public Set<Album> getAlbuns() {
         return albuns;
     }
 
-    public void setAlbuns(List<Album> albuns) {
+    public void setAlbuns(Set<Album> albuns) {
         this.albuns = albuns;
     }
 

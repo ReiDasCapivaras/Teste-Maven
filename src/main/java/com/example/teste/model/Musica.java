@@ -1,18 +1,21 @@
 package com.example.teste.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table()
-public class Musica {
+public class Musica implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    private int id_musica;
 
     @Column
     private String nome;
@@ -21,33 +24,24 @@ public class Musica {
     private String album;
 
     @ManyToMany
-    private List<Artista> artista_id;
+    @JsonIgnoreProperties({"musicas", "albuns"})
+    @JoinTable(name = "musica_artista", joinColumns = {@JoinColumn(name = "id_musica") }, inverseJoinColumns = {@JoinColumn(name = "id_artista")})
+    private Set<Artista> artistas;
 
-    @Column
-    private String artista;
-
-    public List<Artista> getArtista_id() {
-        return artista_id;
+    public int getId_musica() {
+        return id_musica;
     }
 
-    public void setArtista_id(List<Artista> artista_id) {
-        this.artista_id = artista_id;
+    public void setId_musica(int id_musica) {
+        this.id_musica = id_musica;
     }
 
-    public String getArtista() {
-        return artista;
+    public Set<Artista> getArtistas() {
+        return artistas;
     }
 
-    public void setArtista(String artista) {
-        this.artista = artista;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setArtistas(Set<Artista> artistas) {
+        this.artistas = artistas;
     }
 
     public String getNome() {
